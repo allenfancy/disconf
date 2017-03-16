@@ -9,6 +9,7 @@ import org.apache.zookeeper.KeeperException;
 /**
  * @author liaoqiqi
  * @version 2014-6-16
+ * 配置更新
  */
 public class ConfigUpdater {
 

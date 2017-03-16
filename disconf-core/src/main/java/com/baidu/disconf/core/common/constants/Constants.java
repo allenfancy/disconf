@@ -1,6 +1,7 @@
 package com.baidu.disconf.core.common.constants;
 
 /**
+ * 常量的配置
  * @author liaoqiqi
  * @version 2014-6-6
  */
@@ -21,7 +22,7 @@ public class Constants {
     public final static String TYPE = "type";
 
     /**
-     * Disconf-web返回的常量
+     * Disconf-web返回的常量 
      */
     public static final Integer OK = 1;
     public static final Integer NOTOK = 0;

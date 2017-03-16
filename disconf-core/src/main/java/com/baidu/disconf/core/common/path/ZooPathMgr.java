@@ -4,7 +4,7 @@ import com.baidu.disconf.core.common.constants.Constants;
 
 /**
  * Zoo path 管理
- *
+ * ZK的路径管理类
  * @author liaoqiqi
  * @version 2014-6-16
  */

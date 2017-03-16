@@ -2,7 +2,7 @@ package com.baidu.disconf.core.common.constants;
 
 /**
  * 配置类型(配置文件,配置项)
- *
+ * 配置文件类
  * @author liaoqiqi
  * @version 2014-5-16
  */

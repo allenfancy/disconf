@@ -12,7 +12,7 @@ import com.baidu.disconf.core.common.utils.OsUtil;
 
 /**
  * 下载文件
- *
+ * 一次下载文件
  * @author liaoqiqi
  */
 public class FetchConfFile implements UnreliableInterface {
@@ -20,6 +20,7 @@ public class FetchConfFile implements UnreliableInterface {
     protected static final Logger LOGGER = LoggerFactory.getLogger(FetchConfFile.class);
 
     private URL remoteUrl;
+    /**本地临时文件*/
     private File localTmpFile;
 
     /**
@@ -46,21 +47,16 @@ public class FetchConfFile implements UnreliableInterface {
         if (localTmpFile.exists()) {
             localTmpFile.delete();
         }
-
         // start tp download
         LOGGER.debug("start to download. From: " + remoteUrl + " , TO: " + localTmpFile.getAbsolutePath());
-
-        // 下载
+        /**使用Io包进行下载*/
         FileUtils.copyURLToFile(remoteUrl, localTmpFile);
-
         // check
         if (!OsUtil.isFileExist(localTmpFile.getAbsolutePath())) {
             throw new Exception("download is ok, but cannot find downloaded file." + localTmpFile);
         }
-
         // download success
         LOGGER.debug("download success!  " + localTmpFile.getAbsolutePath());
-
         return null;
     }
 

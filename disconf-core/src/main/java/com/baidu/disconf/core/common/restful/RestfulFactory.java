@@ -6,6 +6,7 @@ import com.baidu.disconf.core.common.restful.retry.impl.RetryStrategyRoundBin;
 /**
  * @author liaoqiqi
  * @version 2014-8-4
+ * Rest的工厂模式
  */
 public class RestfulFactory {
 

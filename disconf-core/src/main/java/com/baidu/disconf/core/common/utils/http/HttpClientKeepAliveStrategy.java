@@ -9,7 +9,7 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.protocol.HttpContext;
 
 /**
- * Created by knightliao on 16/1/7.
+ * 自定义客户端连接保持策略
  */
 public class HttpClientKeepAliveStrategy implements ConnectionKeepAliveStrategy {
 
@@ -17,8 +17,10 @@ public class HttpClientKeepAliveStrategy implements ConnectionKeepAliveStrategy 
 
     @Override
     public long getKeepAliveDuration(HttpResponse response, HttpContext context) {
-        HeaderElementIterator it = new BasicHeaderElementIterator(
+       
+    	HeaderElementIterator it = new BasicHeaderElementIterator(
                 response.headerIterator(HTTP.CONN_KEEP_ALIVE));
+    	
         while (it.hasNext()) {
             HeaderElement he = it.nextElement();
             String param = he.getName();

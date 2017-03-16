@@ -14,6 +14,7 @@ public class Constants {
     public static final String DISCONF_PACK_NAME = "com.baidu.disconf";
 
     /**
+     * host and port
      */
     public static final String HOST_PROPERTIES_KEY = "VCAP_APP_HOST";
     public static final String PORT_PROPERTIES_KEY = "VCAP_APP_PORT";

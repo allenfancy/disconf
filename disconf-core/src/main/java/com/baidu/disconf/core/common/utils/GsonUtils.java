@@ -14,35 +14,32 @@ import com.google.gson.reflect.TypeToken;
  */
 public final class GsonUtils {
 
-    private GsonUtils() {
+	private GsonUtils() {
 
-    }
+	}
 
-    /**
-     * @param object
-     * @return
-     */
-    public static String toJson(Object object) {
+	/**
+	 * @param object
+	 * @return
+	 */
+	public static String toJson(Object object) {
+		Gson gson = new Gson();
+		String json = gson.toJson(object);
+		return json;
+	}
 
-        Gson gson = new Gson();
-        String json = gson.toJson(object);
-        return json;
-    }
+	/**
+	 * Parse json to map
+	 * 
+	 * @param json
+	 * @return
+	 */
+	public static Map<String, String> parse2Map(String json) {
 
-    /**
-     * Parse json to map
-     *
-     * @param json
-     * @return
-     */
-    public static Map<String, String> parse2Map(String json) {
+		Type stringStringMap = new TypeToken<Map<String, String>>(){}.getType();
 
-        Type stringStringMap = new TypeToken<Map<String, String>>() {
-        }.getType();
-
-        Gson gson = new Gson();
-        Map<String, String> map = gson.fromJson(json, stringStringMap);
-
-        return map;
-    }
+		Gson gson = new Gson();
+		Map<String, String> map = gson.fromJson(json, stringStringMap);
+		return map;
+	}
 }

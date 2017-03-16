@@ -8,7 +8,7 @@ import com.baidu.disconf.client.support.utils.ClassUtils;
 
 /**
  * 配置项表示
- *
+ * 配置
  * @author liaoqiqi
  * @version 2014-5-20
  */
@@ -18,8 +18,9 @@ public class DisconfCenterItem extends DisconfCenterBaseModel {
     private String key;
     private Object value;
 
-    // Field
+    /**方法*/
     private Field field;
+    /**方法*/
     private Method setMethod;
 
     public String getKey() {

@@ -27,16 +27,16 @@ public interface RestfulMgr {
      * @param fileName      文件名
      * @param localFileDir  本地文件地址
      * @param targetDirPath 下载完后，配置文件放到此目录下
-     *
      * @return 如果是放到Classpath目录下，则返回相对Classpath的路径，如果不是，则返回全路径
-     *
      * @throws Exception
      */
     String downloadFromServer(RemoteUrl remoteUrl, String fileName, String localFileDir, String localFileDirTemp,
                               String targetDirPath,
                               boolean enableLocalDownloadDirInClassPath,
                               int retryTimes, int retrySleepSeconds) throws Exception;
-
+    /**
+     * 关闭
+     */
     void close();
 
 }

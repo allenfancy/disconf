@@ -15,32 +15,28 @@ import org.slf4j.LoggerFactory;
  * @version 2014-6-10
  */
 public class RemoteUrl {
-
+	/**url*/
     private String url;
+    /**服务集合*/
     private List<String> serverList;
-
+    /**URL集合*/
     private List<URL> urls = new ArrayList<URL>();
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(RemoteUrl.class);
 
     public RemoteUrl(String url, List<String> serverList) {
-
         this.url = url;
         this.serverList = serverList;
-
         for (String server : serverList) {
-
             try {
-
                 if (!server.startsWith("http://")) {
                     if (server.startsWith("https://")) {
+                    	
                     } else {
                         server = "http://" + server;
                     }
                 }
-
                 urls.add(new URL(server + url));
-
             } catch (MalformedURLException e) {
                 LOGGER.error(e.toString());
             }

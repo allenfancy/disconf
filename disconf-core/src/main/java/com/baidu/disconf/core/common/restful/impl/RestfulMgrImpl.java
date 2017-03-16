@@ -28,13 +28,13 @@ public class RestfulMgrImpl implements RestfulMgr {
     protected static final Logger LOGGER = LoggerFactory.getLogger(RestfulMgrImpl.class);
 
     /**
-     * 重试策略
+     * 指定重试策略
      */
     private RetryStrategy retryStrategy;
 
     public RestfulMgrImpl(RetryStrategy retryStrategy) {
-
         this.retryStrategy = retryStrategy;
+        /**初始化HttpClient*/
         HttpClientUtil.init();
     }
 
@@ -52,16 +52,12 @@ public class RestfulMgrImpl implements RestfulMgr {
             throws Exception {
         Exception ex = null;
         for (URL url : remoteUrl.getUrls()) {
-
-            // 可重试的下载
+            /**可重试的下载：制定需要转换的json的对象的class,Http的方式进行下载*/
             UnreliableInterface unreliableImpl = new RestfulGet<T>(clazz, url);
-
             try {
-
+            	/**进行重试*/
                 T t = retryStrategy.retry(unreliableImpl, retryTimes, retrySleepSeconds);
-
                 return t;
-
             } catch (Exception e) {
                 ex = e;
                 try {
@@ -71,7 +67,6 @@ public class RestfulMgrImpl implements RestfulMgr {
                 }
             }
         }
-
         throw new Exception("cannot get: " + remoteUrl, ex);
     }
 
@@ -95,49 +90,37 @@ public class RestfulMgrImpl implements RestfulMgr {
 
         // 目标地址文件
         File localFile = null;
-
         //
         // 进行下载、mv、copy
         //
-
         try {
-
             // 可重试的下载
             File tmpFilePathUniqueFile = retryDownload(localFileDirTemp, fileName, remoteUrl, retryTimes,
                     retrySleepSeconds);
-
             // 将 tmp file copy localFileDir
             localFile = transfer2SpecifyDir(tmpFilePathUniqueFile, localFileDir, fileName, false);
-
             // mv 到指定目录
             if (targetDirPath != null) {
-
                 //
                 if (enableLocalDownloadDirInClassPath || !targetDirPath.equals(ClassLoaderUtil.getClassPath
                         ())) {
                     localFile = transfer2SpecifyDir(tmpFilePathUniqueFile, targetDirPath, fileName, true);
                 }
             }
-
             LOGGER.debug("Move to: " + localFile.getAbsolutePath());
 
         } catch (Exception e) {
-
             LOGGER.warn("download file failed, using previous download file.", e);
         }
-
         //
         // 判断是否下载失败
         //
-
         if (localFile == null || !localFile.exists()) {
             throw new Exception("target file cannot be found! " + fileName);
         }
-
         //
         // 下面为下载成功
         //
-
         // 返回相对路径
         String relativePathString = OsUtil.getRelativePath(localFile, new File(localFileDir));
         if (relativePathString != null) {
@@ -145,7 +128,6 @@ public class RestfulMgrImpl implements RestfulMgr {
                 return relativePathString;
             }
         }
-
         // 否则, 返回全路径
         return localFile.getAbsolutePath();
     }
@@ -206,7 +188,6 @@ public class RestfulMgrImpl implements RestfulMgr {
 
     /**
      * Retry封装 RemoteUrl 支持多Server的下载
-     *
      * @param remoteUrl
      * @param localTmpFile
      * @param retryTimes
@@ -218,14 +199,10 @@ public class RestfulMgrImpl implements RestfulMgr {
             throws Exception {
         Exception ex = null;
         for (URL url : remoteUrl.getUrls()) {
-
-            // 可重试的下载
+            /**可重试的下载:FetchConfFile*/
             UnreliableInterface unreliableImpl = new FetchConfFile(url, localTmpFile);
-
             try {
-
                 return retryStrategy.retry(unreliableImpl, retryTimes, sleepSeconds);
-
             } catch (Exception e) {
                 ex = e;
                 try {

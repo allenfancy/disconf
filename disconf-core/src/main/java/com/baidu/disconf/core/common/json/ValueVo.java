@@ -4,7 +4,7 @@ import com.baidu.disconf.core.common.constants.Constants;
 
 /**
  * 通用的Value Vo
- *
+ * VO
  * @author liaoqiqi
  * @version 2014-6-10
  */

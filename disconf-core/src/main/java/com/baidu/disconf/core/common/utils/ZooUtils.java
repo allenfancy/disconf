@@ -24,7 +24,6 @@ public final class ZooUtils {
      * @return
      */
     public static String getIp() {
-
         try {
             return MachineInfo.getHostIp();
         } catch (Exception e) {

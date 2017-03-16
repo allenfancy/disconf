@@ -16,7 +16,7 @@ public final class MachineInfo {
     }
 
     /**
-     * @return
+     * @return hostname
      *
      * @Description: 获取机器名
      */
@@ -25,17 +25,14 @@ public final class MachineInfo {
         try {
             InetAddress addr = InetAddress.getLocalHost();
             String hostname = addr.getHostName();
-
             return hostname;
-
         } catch (UnknownHostException e) {
-
             throw new Exception(e);
         }
     }
 
     /**
-     * @return
+     * @return hostIp
      *
      * @Description: 获取机器名
      */
@@ -44,11 +41,8 @@ public final class MachineInfo {
         try {
             InetAddress addr = InetAddress.getLocalHost();
             String ip = addr.getHostAddress();
-
             return ip;
-
         } catch (UnknownHostException e) {
-
             throw new Exception(e);
         }
     }

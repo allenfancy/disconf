@@ -17,32 +17,25 @@ public class RetryStrategyRoundBin implements RetryStrategy {
     protected static final Logger LOGGER = LoggerFactory.getLogger(RetryStrategyRoundBin.class);
 
     /**
-     * @param unreliableImpl
-     * @param retryTimes
-     * @param sleepSeconds
+     * @param unreliableImpl	执行方法
+     * @param retryTimes		重试次数
+     * @param sleepSeconds		失败后休息时间
      */
     public <T> T retry(UnreliableInterface unreliableImpl, int retryTimes, int sleepSeconds) throws Exception {
-
         int cur_time = 0;
         for (; cur_time < retryTimes; ++cur_time) {
-
             try {
-
+            	/**进行重试*/
                 return unreliableImpl.call();
-
             } catch (Exception e) {
-
                 LOGGER.warn("cannot reach, will retry " + cur_time + " .... " + e.toString());
-
                 try {
                     Thread.sleep(sleepSeconds * 1000);
                 } catch (InterruptedException e1) {
                 }
             }
         }
-
         LOGGER.warn("finally failed....");
-
         throw new Exception();
     }
 }

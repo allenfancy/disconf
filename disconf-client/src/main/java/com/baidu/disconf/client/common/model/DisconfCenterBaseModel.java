@@ -2,7 +2,7 @@ package com.baidu.disconf.client.common.model;
 
 /**
  * 配置基类
- *
+ * 抽象的配置积累
  * @author liaoqiqi
  * @version 2014-8-4
  */

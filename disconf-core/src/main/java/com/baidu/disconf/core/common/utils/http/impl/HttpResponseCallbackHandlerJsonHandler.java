@@ -20,12 +20,9 @@ public class HttpResponseCallbackHandlerJsonHandler<T> implements HttpResponseCa
 
     @Override
     public T handleResponse(String requestBody, HttpEntity entity) throws IOException {
-
         String json = EntityUtils.toString(entity, "UTF-8");
-
         com.google.gson.Gson gson = new com.google.gson.Gson();
         T response = gson.fromJson(json, clazz);
-
         return response;
     }
 }

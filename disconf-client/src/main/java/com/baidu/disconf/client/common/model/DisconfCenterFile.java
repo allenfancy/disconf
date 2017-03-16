@@ -17,7 +17,7 @@ import com.baidu.disconf.core.common.utils.OsUtil;
 
 /**
  * 配置文件表示
- *
+ * 核心文件
  * @author liaoqiqi
  * @version 2014-5-20
  */
@@ -203,7 +203,6 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
 
         /**
          * 是否是静态域
-         *
          * @return
          */
         public boolean isStatic() {
@@ -212,7 +211,6 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
 
         /**
          * 设置value, 优先使用 setter method, 然后其次是反射
-         *
          * @param value
          */
         public Object setValue4StaticFileItem(Object value) throws Exception {

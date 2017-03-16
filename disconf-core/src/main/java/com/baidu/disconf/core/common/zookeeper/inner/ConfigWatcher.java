@@ -10,6 +10,7 @@ import org.apache.zookeeper.Watcher.Event.EventType;
 /**
  * @author liaoqiqi
  * @version 2014-6-16
+ * 配置监听器
  */
 public class ConfigWatcher implements Watcher {
 
@@ -21,14 +22,14 @@ public class ConfigWatcher implements Watcher {
     }
 
     public void displayConfig() throws InterruptedException, KeeperException {
-
         String value = store.read(ConfigUpdater.PATH, this, null);
+        /**使用System.out.print?**/
         System.out.printf("Read %s as %s\n", ConfigUpdater.PATH, value);
     }
 
     @Override
     public void process(WatchedEvent event) {
-
+    	/**节点数据发生变化*/
         if (event.getType() == EventType.NodeDataChanged) {
             try {
                 displayConfig();
@@ -43,7 +44,7 @@ public class ConfigWatcher implements Watcher {
     }
 
     public static void main(String[] args) throws Exception {
-
+    	/***使用这种方式启动?*/
         ConfigWatcher configWatcher = new ConfigWatcher(args[0]);
         configWatcher.displayConfig();
 

@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * OsUtil
- *
+ * 操作系统工具类
  * @author knightliao
  */
 public final class OsUtil {
@@ -25,11 +25,8 @@ public final class OsUtil {
 
     /**
      * 建多层目录
-     *
      * @param filePath
-     *
      * @return boolean
-     *
      * @throws
      * @Description: make directory
      */
@@ -38,15 +35,12 @@ public final class OsUtil {
         if (!f.exists()) {
             return f.mkdirs();
         }
-
         return true;
     }
 
     /**
      * @param filePathString
-     *
      * @return boolean
-     *
      * @throws Exception
      * @Description: 文件或目录是否存在
      * @author liaoqiqi
@@ -60,40 +54,29 @@ public final class OsUtil {
 
     /**
      * @param pathElements
-     *
      * @return boolean
-     *
      * @throws Exception
      * @Description: JOIN PATH
      * @author liaoqiqi
      * @date 2013-6-13
      */
     public static String pathJoin(final String... pathElements) {
-
         final String path;
-
         if (pathElements == null || pathElements.length == 0) {
             path = File.separator;
-
         } else {
-
             final StringBuffer sb = new StringBuffer();
-
             for (final String pathElement : pathElements) {
-
                 if (pathElement.length() > 0) {
                     sb.append(pathElement);
                     sb.append(File.separator);
                 }
             }
-
             if (sb.length() > 0) {
                 sb.deleteCharAt(sb.length() - 1);
             }
-
             path = sb.toString();
         }
-
         return (path);
     }
 
@@ -132,7 +115,6 @@ public final class OsUtil {
         if (dest.exists()) {
             dest.delete();
         }
-
         // 转移临时下载文件至下载文件夹
         FileUtils.copyFile(src, dest);
     }
@@ -153,20 +135,14 @@ public final class OsUtil {
         File lockFile = new File(dest + ".lock");
         FileOutputStream outStream = null;
         FileLock lock = null;
-
         try {
-
             int tryTime = 0;
             while (tryTime < 3) {
-
                 try {
-
                     outStream = new FileOutputStream(lockFile);
                     FileChannel channel = outStream.getChannel();
-
                     lock = channel.tryLock();
                     if (lock != null) {
-
                         if (dest.exists()) {
                             // 判断内容是否一样
                             if (FileUtils.isFileEqual(src, dest)) {
@@ -179,7 +155,6 @@ public final class OsUtil {
                         }
 
                         logger.debug("start to replace " + src.getAbsolutePath() + " to " + dest.getAbsolutePath());
-
                         // 转移
                         transferFile(src, dest);
 
